@@ -41,7 +41,6 @@ namespace HighSellPrice
                     }
                 }
                 SettlementEventsVM settlementEvents = __instance.SettlementEvents;
-                EventTypes = Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
                 SettlementNameplateEventItemVM settlementNameplateEventItem = settlementEvents.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypes);
                 if (num > 0)
                 {
@@ -56,6 +55,6 @@ namespace HighSellPrice
                 }
             }
         }
-        public static int EventTypes { get; set; }
+        public static int EventTypes => Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
     }
 }
