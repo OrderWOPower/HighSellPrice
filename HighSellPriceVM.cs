@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
@@ -40,18 +40,18 @@ namespace HighSellPrice
                         }
                     }
                 }
-                SettlementEventsVM settlementEvents = __instance.SettlementEvents;
-                SettlementNameplateEventItemVM settlementNameplateEventItem = settlementEvents.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypes);
+                SettlementEventsVM settlementEventsVM = __instance.SettlementEvents;
+                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementEventsVM.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypes);
                 if (num > 0)
                 {
-                    if (!settlementEvents.EventsList.Contains(settlementNameplateEventItem))
+                    if (!settlementEventsVM.EventsList.Contains(settlementNameplateEventItemVM))
                     {
-                        settlementEvents.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypes));
+                        settlementEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypes));
                     }
                 }
                 else
                 {
-                    settlementEvents.EventsList.Remove(settlementNameplateEventItem);
+                    settlementEventsVM.EventsList.Remove(settlementNameplateEventItemVM);
                 }
             }
         }
