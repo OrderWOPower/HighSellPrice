@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using TaleWorlds.GauntletUI;
 using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Nameplate;
 
@@ -8,7 +8,7 @@ namespace HighSellPrice
     public class HighSellPriceWidget
     {
         // Set the icon widget to a red coin.
-        private static void Prefix(int type, BrushWidget __instance)
+        private static void Prefix(BrushWidget __instance, int type)
         {
             if (type == HighSellPriceVM.EventTypes)
             {
