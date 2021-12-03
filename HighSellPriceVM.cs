@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
@@ -20,7 +20,12 @@ namespace HighSellPrice
                 for (int i = 0; i < itemRoster.Count; i++)
                 {
                     ItemObject itemAtIndex = itemRoster.GetItemAtIndex(i);
-                    if ((!itemAtIndex.IsFood && itemAtIndex.IsTradeGood) || (itemAtIndex.IsFood && itemRoster.GetElementNumber(i) > 1))
+                    bool isFood = itemAtIndex.IsFood;
+                    bool isCraftable = itemAtIndex.ItemCategory == DefaultItemCategories.Iron || itemAtIndex.ItemCategory == DefaultItemCategories.Wood;
+                    bool isOther = itemAtIndex.IsTradeGood && !isFood && !isCraftable;
+                    int elementNumber = itemRoster.GetElementNumber(i);
+                    HighSellPriceSettings settings = HighSellPriceSettings.Instance;
+                    if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount))
                     {
                         ItemCategory itemCategory = itemAtIndex.ItemCategory;
                         float num2 = 0f;
@@ -41,12 +46,12 @@ namespace HighSellPrice
                     }
                 }
                 SettlementEventsVM settlementEventsVM = __instance.SettlementEvents;
-                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementEventsVM.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypes);
+                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementEventsVM.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength);
                 if (num > 0)
                 {
                     if (!settlementEventsVM.EventsList.Contains(settlementNameplateEventItemVM))
                     {
-                        settlementEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypes));
+                        settlementEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength));
                     }
                 }
                 else
@@ -55,6 +60,6 @@ namespace HighSellPrice
                 }
             }
         }
-        public static int EventTypes => Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
+        public static int EventTypesLength => Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
     }
 }
