@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
@@ -20,10 +20,10 @@ namespace HighSellPrice
                 for (int i = 0; i < itemRoster.Count; i++)
                 {
                     ItemObject itemAtIndex = itemRoster.GetItemAtIndex(i);
+                    int elementNumber = itemRoster.GetElementNumber(i);
                     bool isFood = itemAtIndex.IsFood;
                     bool isCraftable = itemAtIndex.ItemCategory == DefaultItemCategories.Iron || itemAtIndex.ItemCategory == DefaultItemCategories.Wood;
                     bool isOther = itemAtIndex.IsTradeGood && !isFood && !isCraftable;
-                    int elementNumber = itemRoster.GetElementNumber(i);
                     HighSellPriceSettings settings = HighSellPriceSettings.Instance;
                     if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount))
                     {
