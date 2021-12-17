@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using HarmonyLib;
 using TaleWorlds.CampaignSystem;
@@ -10,12 +10,13 @@ namespace HighSellPrice
     [HarmonyPatch(typeof(SettlementNameplateVM), "RefreshDynamicProperties")]
     public class HighSellPriceVM
     {
-        // If the player has non-food trade goods of any number or food of more than 1 each with high selling prices, add an icon to the city's nameplate. If not, remove the icon.
+        // If the player has trade goods of more than the configurable number with high selling prices, add an icon to the city's nameplate. If not, remove the icon.
         public static void Postfix(SettlementNameplateVM __instance)
         {
             if (__instance.IsInRange && __instance.Settlement.IsTown)
             {
                 ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
+                HighSellPriceSettings settings = HighSellPriceSettings.Instance;
                 int num = 0;
                 for (int i = 0; i < itemRoster.Count; i++)
                 {
@@ -24,7 +25,6 @@ namespace HighSellPrice
                     bool isFood = itemAtIndex.IsFood;
                     bool isCraftable = itemAtIndex.ItemCategory == DefaultItemCategories.Iron || itemAtIndex.ItemCategory == DefaultItemCategories.Wood;
                     bool isOther = itemAtIndex.IsTradeGood && !isFood && !isCraftable;
-                    HighSellPriceSettings settings = HighSellPriceSettings.Instance;
                     if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount))
                     {
                         ItemCategory itemCategory = itemAtIndex.ItemCategory;
