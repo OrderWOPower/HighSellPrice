@@ -1,9 +1,9 @@
-﻿using System;
+﻿using HarmonyLib;
+using SandBox.ViewModelCollection.Nameplate;
+using System;
 using System.Linq;
-using HarmonyLib;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using SandBox.ViewModelCollection.Nameplate;
 
 namespace HighSellPrice
 {
