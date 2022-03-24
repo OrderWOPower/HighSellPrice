@@ -2,7 +2,9 @@
 using SandBox.ViewModelCollection.Nameplate;
 using System;
 using System.Linq;
-using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Roster;
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 
 namespace HighSellPrice
@@ -10,6 +12,8 @@ namespace HighSellPrice
     [HarmonyPatch(typeof(SettlementNameplateVM), "RefreshDynamicProperties")]
     public class HighSellPriceVM
     {
+        public static int EventTypesLength => Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
+
         // If the player has trade goods of more than the configurable number with high selling prices, add an icon to the city's nameplate. If not, remove the icon.
         public static void Postfix(SettlementNameplateVM __instance)
         {
@@ -60,6 +64,5 @@ namespace HighSellPrice
                 }
             }
         }
-        public static int EventTypesLength => Enum.GetNames(typeof(SettlementNameplateEventItemVM.SettlementEventType)).Length;
     }
 }
