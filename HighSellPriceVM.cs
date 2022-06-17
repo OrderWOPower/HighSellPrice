@@ -38,7 +38,7 @@ namespace HighSellPrice
                         {
                             foreach (Town town in Town.AllTowns)
                             {
-                                num2 += town.GetItemCategoryPriceIndex(itemCategory, false) + town.GetItemCategoryPriceIndex(itemCategory, false);
+                                num2 += town.GetItemCategoryPriceIndex(itemCategory) + town.GetItemCategoryPriceIndex(itemCategory);
                                 num3 += 1f;
                             }
                         }
@@ -49,18 +49,18 @@ namespace HighSellPrice
                         }
                     }
                 }
-                SettlementEventsVM settlementEventsVM = __instance.SettlementEvents;
-                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementEventsVM.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength);
+                SettlementNameplateEventsVM settlementNameplateEventsVM = __instance.SettlementEvents;
+                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementNameplateEventsVM.EventsList.FirstOrDefault((SettlementNameplateEventItemVM e) => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength);
                 if (num > 0)
                 {
-                    if (!settlementEventsVM.EventsList.Contains(settlementNameplateEventItemVM))
+                    if (!settlementNameplateEventsVM.EventsList.Contains(settlementNameplateEventItemVM))
                     {
-                        settlementEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength));
+                        settlementNameplateEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)EventTypesLength));
                     }
                 }
                 else
                 {
-                    settlementEventsVM.EventsList.Remove(settlementNameplateEventItemVM);
+                    settlementNameplateEventsVM.EventsList.Remove(settlementNameplateEventItemVM);
                 }
             }
         }
