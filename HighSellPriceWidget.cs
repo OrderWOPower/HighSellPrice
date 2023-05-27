@@ -6,12 +6,13 @@ namespace HighSellPrice
     [HarmonyPatch(typeof(SettlementNameplateEventVisualBrushWidget), "UpdateVisual")]
     public class HighSellPriceWidget
     {
-        // Set the icon widget to a red coin.
         private static void Prefix(SettlementNameplateEventVisualBrushWidget __instance, int type)
         {
-            if (type == HighSellPriceVM.EventTypesLength)
+            if (type == HighSellPriceVM.NumOfEventTypes)
             {
+                // Set the icon widget to a red coin.
                 __instance.SetState("HighSellingPrice");
+
                 return;
             }
         }
