@@ -6,6 +6,7 @@ using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.CampaignSystem.Roster;
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace HighSellPrice
 {
@@ -19,8 +20,8 @@ namespace HighSellPrice
             if (__instance.IsInRange && __instance.Settlement.IsTown)
             {
                 ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
-                SettlementNameplateEventsVM settlementNameplateEventsVM = __instance.SettlementEvents;
-                SettlementNameplateEventItemVM settlementNameplateEventItemVM = settlementNameplateEventsVM.EventsList.FirstOrDefault(e => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes);
+                MBBindingList<SettlementNameplateEventItemVM> eventsList = __instance.SettlementEvents.EventsList;
+                SettlementNameplateEventItemVM highSellPriceEvent = eventsList.FirstOrDefault(e => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes);
                 HighSellPriceSettings settings = HighSellPriceSettings.Instance;
                 int numOfHighSellingItems = 0;
 
@@ -55,16 +56,16 @@ namespace HighSellPrice
 
                 if (numOfHighSellingItems > 0)
                 {
-                    if (!settlementNameplateEventsVM.EventsList.Contains(settlementNameplateEventItemVM))
+                    if (!eventsList.Contains(highSellPriceEvent))
                     {
                         // If the player has trade goods of more than the configurable number with high selling prices, add an icon to the city's nameplate. 
-                        settlementNameplateEventsVM.EventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes));
+                        eventsList.Add(new SettlementNameplateEventItemVM((SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes));
                     }
                 }
                 else
                 {
                     // If not, remove the icon.
-                    settlementNameplateEventsVM.EventsList.Remove(settlementNameplateEventItemVM);
+                    eventsList.Remove(highSellPriceEvent);
                 }
             }
         }
