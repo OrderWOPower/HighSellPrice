@@ -27,13 +27,13 @@ namespace HighSellPrice
 
                 for (int i = 0; i < itemRoster.Count; i++)
                 {
-                    ItemObject itemAtIndex = itemRoster.GetItemAtIndex(i);
+                    ItemObject item = itemRoster.GetItemAtIndex(i);
                     int elementNumber = itemRoster.GetElementNumber(i);
-                    bool isFood = itemAtIndex.IsFood, isCraftable = itemAtIndex.ItemCategory == DefaultItemCategories.Iron || itemAtIndex.ItemCategory == DefaultItemCategories.Wood, isOther = itemAtIndex.IsTradeGood && !isFood && !isCraftable;
+                    bool isFood = item.IsFood, isCraftable = item.ItemCategory == DefaultItemCategories.Iron || item.ItemCategory == DefaultItemCategories.Wood, isOther = item.IsTradeGood && !isFood && !isCraftable;
 
                     if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount))
                     {
-                        ItemCategory itemCategory = itemAtIndex.ItemCategory;
+                        ItemCategory itemCategory = item.ItemCategory;
                         float num = 0f, num2 = 0f;
 
                         if (Town.AllTowns != null)
@@ -47,7 +47,7 @@ namespace HighSellPrice
 
                         num /= num2 * 2f;
 
-                        if (__instance.Settlement.Town.GetItemPrice(itemAtIndex, MobileParty.MainParty, true) / (float)itemAtIndex.Value > num * 1.3f)
+                        if (__instance.Settlement.Town.GetItemPrice(item, MobileParty.MainParty, true) / (float)item.Value > num * 1.3f)
                         {
                             numOfHighSellingItems++;
                         }
