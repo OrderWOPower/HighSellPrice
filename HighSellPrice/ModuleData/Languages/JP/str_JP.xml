@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base>
+ <tags>
+  <tag language="日本語"/>
+ </tags>
+ <strings>
+  <string id="HSPOptG001" text="食糧"/>
+  <string id="HSPOptG002" text="クラフトアイテム"/>
+  <string id="HSPOptG003" text="その他"/>
+  <string id="HSPOpt001" text="食糧の設定切り替え"/>
+  <string id="HSPOpt001Hint" text="食糧アイテムの所持数を通知の発生条件にします。デフォルトは「有効」です。"/>
+  <string id="HSPOpt002" text="食糧の最小所持数"/>
+  <string id="HSPOpt002Hint" text="この最小値以上の所持数の食糧アイテムに対して、通知を発生させます。デフォルトは「2」です。"/>
+  <string id="HSPOpt003" text="鍛冶アイテムの設定切り替え"/>
+  <string id="HSPOpt003Hint" text="鍛冶アイテムの所持数を通知の発生条件にします。デフォルトは「有効」です。"/>
+  <string id="HSPOpt004" text="鍛冶アイテムの最小所持数"/>
+  <string id="HSPOpt004Hint" text="この最小値以上の所持数の鍛冶アイテムに対して、通知を発生させます。デフォルトは「2」です。"/>
+  <string id="HSPOpt005" text="その他のアイテムの設定切り替え"/>
+  <string id="HSPOpt005Hint" text="その他のアイテムの所持数を通知の発生条件にします。デフォルトは「有効」です。"/>
+  <string id="HSPOpt006" text="その他のアイテムの最小所持数"/>
+  <string id="HSPOpt006Hint" text="この最小値以上の所持数のその他のアイテムに対して、通知を発生させます。デフォルトは「1」です。"/>
+ </strings>
+</base>
