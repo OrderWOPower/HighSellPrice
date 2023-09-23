@@ -22,8 +22,8 @@ namespace HighSellPrice
         {
             if (__instance.IsInRange && __instance.Settlement.IsTown)
             {
-                IViewDataTracker campaignBehavior = Campaign.Current.GetCampaignBehavior<IViewDataTracker>();
-                List<string> lockedItemIDs = campaignBehavior.GetInventoryLocks().ToList();
+                IViewDataTracker viewDataTracker = Campaign.Current.GetCampaignBehavior<IViewDataTracker>();
+                List<string> lockedItemIDs = viewDataTracker.GetInventoryLocks().ToList();
                 MBBindingList<SettlementNameplateEventItemVM> eventsList = __instance.SettlementEvents.EventsList;
                 SettlementNameplateEventItemVM highSellPriceEvent = eventsList.FirstOrDefault(e => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes);
                 ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
