@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base>
+ <tags>
+  <tag language="简体中文"/>
+ </tags>
+ <strings>
+  <string id="HSPOptG001" text="食物"/>
+  <string id="HSPOptG002" text="锻造的"/>
+  <string id="HSPOptG003" text="其他的"/>
+  <string id="HSPOpt001" text="切换食物"/>
+  <string id="HSPOpt001Hint" text="计算食物的数量。默认启用。"/>
+  <string id="HSPOpt002" text="最少食物的数量"/>
+  <string id="HSPOpt002Hint" text="触发警报最少食物的数量。默认为2。"/>
+  <string id="HSPOpt003" text="切换锻造的"/>
+  <string id="HSPOpt003Hint" text="计算锻造的的数量。默认启用。"/>
+  <string id="HSPOpt004" text="最少锻造的的数量"/>
+  <string id="HSPOpt004Hint" text="触发警报最少锻造的的数量。默认为2。"/>
+  <string id="HSPOpt005" text="切换其他"/>
+  <string id="HSPOpt005Hint" text="计算其他的数量。默认启用。"/>
+  <string id="HSPOpt006" text="最少其他的数量"/>
+  <string id="HSPOpt006Hint" text="触发警报最少其他的数量。默认为1。"/>
+ </strings>
+</base>
