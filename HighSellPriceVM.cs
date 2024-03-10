@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using SandBox.ViewModelCollection.Nameplate;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -22,8 +21,6 @@ namespace HighSellPrice
         {
             if (__instance.IsInRange && __instance.Settlement.IsTown)
             {
-                IViewDataTracker viewDataTracker = Campaign.Current.GetCampaignBehavior<IViewDataTracker>();
-                List<string> lockedItemIDs = viewDataTracker.GetInventoryLocks().ToList();
                 MBBindingList<SettlementNameplateEventItemVM> eventsList = __instance.SettlementEvents.EventsList;
                 SettlementNameplateEventItemVM highSellPriceEvent = eventsList.FirstOrDefault(e => e.EventType == (SettlementNameplateEventItemVM.SettlementEventType)NumOfEventTypes);
                 ItemRoster itemRoster = MobileParty.MainParty.ItemRoster;
@@ -38,7 +35,7 @@ namespace HighSellPrice
                     bool isFood = item.IsFood, isCraftable = item.ItemCategory == DefaultItemCategories.Iron || item.ItemCategory == DefaultItemCategories.Wood, isOther = item.IsTradeGood && !isFood && !isCraftable;
                     string itemLockStringID = CampaignUIHelper.GetItemLockStringID(elementCopyAtIndex.EquipmentElement);
 
-                    if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount) && !lockedItemIDs.Contains(itemLockStringID))
+                    if ((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount) && !Campaign.Current.GetCampaignBehavior<IViewDataTracker>().GetInventoryLocks().Contains(itemLockStringID))
                     {
                         ItemCategory itemCategory = item.ItemCategory;
                         float num = 0f, num2 = 0f;
