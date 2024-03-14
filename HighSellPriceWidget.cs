@@ -12,8 +12,6 @@ namespace HighSellPrice
             {
                 // Set the icon widget to a red coin.
                 __instance.SetState("HighSellingPrice");
-
-                return;
             }
         }
     }
