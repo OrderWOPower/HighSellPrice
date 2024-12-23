@@ -31,9 +31,10 @@ namespace HighSellPrice
                 {
                     ItemObject item = itemRoster.GetItemAtIndex(i);
                     int elementNumber = itemRoster.GetElementNumber(i);
+                    ItemRosterElement elementCopy = itemRoster.GetElementCopyAtIndex(i);
                     bool isFood = item.IsFood, isCraftable = item.ItemCategory == DefaultItemCategories.Iron || item.ItemCategory == DefaultItemCategories.Wood, isOther = item.IsTradeGood && !isFood && !isCraftable;
 
-                    if (((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount)) && !Campaign.Current.GetCampaignBehavior<IViewDataTracker>().GetInventoryLocks().Contains(CampaignUIHelper.GetItemLockStringID(itemRoster.GetElementCopyAtIndex(i).EquipmentElement)))
+                    if (((isFood && settings.ShouldCountFood && elementNumber >= settings.MinFoodCount) || (isCraftable && settings.ShouldCountCraftables && elementNumber >= settings.MinCraftableCount) || (isOther && settings.ShouldCountOthers && elementNumber >= settings.MinOtherCount)) && !Campaign.Current.GetCampaignBehavior<IViewDataTracker>().GetInventoryLocks().Contains(CampaignUIHelper.GetItemLockStringID(elementCopy.EquipmentElement)))
                     {
                         float num = 0f, num2 = 0f;
 
@@ -48,7 +49,7 @@ namespace HighSellPrice
 
                         num /= num2;
 
-                        if (__instance.Settlement.Town.GetItemPrice(item, MobileParty.MainParty, true) / (float)item.Value > num * 1.3f)
+                        if (__instance.Settlement.Town.GetItemPrice(elementCopy.EquipmentElement, MobileParty.MainParty, true) / (float)item.Value > num * 1.3f)
                         {
                             numOfHighSellingItems++;
                         }
